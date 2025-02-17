@@ -1,12 +1,12 @@
 "use client";
 
 import { Conversation, useChatStore } from "@/store/chatStore";
+import { FaMoon, FaPlus, FaSun } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
-import { FaPlus } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function ConversationList() {
   const router = useRouter();
@@ -16,9 +16,20 @@ export default function ConversationList() {
     conversations,
     addConversation,
     currentUser,
+    darkMode,
+    toggleDarkMode,
   } = useChatStore();
   const [showNewChatForm, setShowNewChatForm] = useState(false);
   const [newContactName, setNewContactName] = useState("");
+
+  // Apply dark mode class to the `html` tag
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   // Format the timestamp
   const formatTime = (timestamp: string) => {
@@ -55,15 +66,21 @@ export default function ConversationList() {
   };
 
   return (
-    <div className="p-4 space-y-4 bg-gray-100 dark:bg-gray-900 h-screen w-full flex flex-col gap-2">
-      {/* New Chat Button */}
-      <div className="text-2xl font-bold text-gray-700 dark:text-gray-200 py-2">
+    <div
+      className={`p-4 space-y-4 h-screen w-full flex flex-col gap-2 transition-colors ${
+        darkMode ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-gray-900"
+      }`}
+    >
+      {/* Header */}
+      <div className="text-2xl font-bold py-2">
         <h1>Chat Room</h1>
       </div>
-      <div className="sticky top-0 bg-gray-100 dark:bg-gray-900 py-2 z-10 !mt-0">
+
+      {/* New Chat Button */}
+      <div className="sticky top-0 py-2 z-10 !mt-0 transition-colors bg-opacity-90">
         <button
           onClick={() => setShowNewChatForm(!showNewChatForm)}
-          className="w-full flex items-center justify-center gap-2 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+          className="w-full flex items-center justify-center gap-2 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition"
         >
           <FaPlus size={14} />
           <span>New Conversation</span>
@@ -71,18 +88,25 @@ export default function ConversationList() {
 
         {/* New Chat Form */}
         {showNewChatForm && (
-          <div className="mt-2 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <div
+            className={`mt-2 p-3 rounded-lg shadow-md transition-colors ${
+              darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+            }`}
+          >
             <input
               type="text"
               value={newContactName}
               onChange={(e) => setNewContactName(e.target.value)}
               placeholder="Enter contact name"
-              className="w-full p-2 mb-2 border rounded-md dark:bg-gray-700 dark:text-white"
+              className="w-full p-2 mb-2 border rounded-md transition-colors 
+                bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white"
             />
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setShowNewChatForm(false)}
-                className="px-3 py-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500"
+                className="px-3 py-1 rounded-md transition-colors 
+                  bg-gray-300 text-gray-700 hover:bg-gray-400 
+                  dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
               >
                 Cancel
               </button>
@@ -102,12 +126,11 @@ export default function ConversationList() {
         <Link key={conv.id} href={`/chat/${conv.id}`} className="!mt-0">
           <div
             onClick={() => setSelectedChat(conv.id)}
-            className={`flex justify-between items-center p-3 rounded-lg cursor-pointer 
-              ${
-                selectedChatId === conv.id
-                  ? "bg-gray-300 dark:bg-gray-700"
-                  : "hover:bg-gray-200 dark:hover:bg-gray-800"
-              }`}
+            className={`flex justify-between items-center p-3 rounded-lg cursor-pointer transition-colors ${
+              selectedChatId === conv.id
+                ? "bg-gray-300 dark:bg-gray-500"
+                : "hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
           >
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -125,7 +148,11 @@ export default function ConversationList() {
                 ) : null}
               </div>
               <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">
+                <p
+                  className={`font-semibold ${
+                    selectedChatId === conv.id ? "text-white" : ""
+                  }`}
+                >
                   {conv.participants[1].name}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 truncate w-48">
@@ -140,6 +167,19 @@ export default function ConversationList() {
           </div>
         </Link>
       ))}
+
+      {/* Dark Mode Toggle */}
+      <div className="mt-auto flex justify-center p-3">
+        <button
+          onClick={toggleDarkMode}
+          className="flex items-center gap-2 p-2 rounded-lg transition-colors 
+            bg-gray-300 text-gray-700 hover:bg-gray-400 
+            dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+        >
+          {darkMode ? <FaSun /> : <FaMoon />}
+          <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
+        </button>
+      </div>
     </div>
   );
 }

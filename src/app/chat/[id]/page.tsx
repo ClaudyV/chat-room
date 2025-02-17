@@ -20,6 +20,7 @@ export default function ChatPage() {
     addMessage,
     toggleReaction,
     markAsRead,
+    darkMode,
   } = useChatStore();
   const [input, setInput] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -277,9 +278,17 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-white dark:bg-gray-800">
+    <div
+      className={`${
+        darkMode ? "bg-white dark:bg-gray-800" : "bg-white"
+      } flex flex-col h-screen `}
+    >
       {/* Chat Header */}
-      <div className="p-4 bg-gray-100 dark:bg-gray-900 border-b flex items-center space-x-3">
+      <div
+        className={`p-4  border-b flex items-center space-x-3 ${
+          darkMode ? "bg-gray-100 dark:bg-gray-900" : "bg-white"
+        }`}
+      >
         <Image
           src={otherParticipant.avatar}
           width={40}
@@ -288,7 +297,11 @@ export default function ChatPage() {
           alt="avatar"
         />
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          <h2
+            className={`text-lg font-semibold ${
+              darkMode ? "text-white" : "text-black"
+            }`}
+          >
             {otherParticipant.name}
           </h2>
           {currentConversation.isTyping && (
@@ -327,8 +340,12 @@ export default function ChatPage() {
                 <div
                   className={`relative p-3 rounded-lg max-w-xs ${
                     isMe
-                      ? "bg-[#545556] text-white"
-                      : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                      ? darkMode
+                        ? "bg-[#545556] text-white"
+                        : "bg-[#dbdbdb] text-[#545556]"
+                      : darkMode
+                      ? "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                      : "bg-gray-100 text-[#545556]"
                   }`}
                   onDoubleClick={() => setActiveReactionMessage(msg.id)}
                 >
@@ -345,7 +362,13 @@ export default function ChatPage() {
                     {msg.content.text && <p>{msg.content.text}</p>}
                   </div>
                   <div className="flex justify-between text-xs text-gray-300 dark:text-gray-400 mt-1">
-                    <span>{formatTime(msg.timestamp)}</span>
+                    <span
+                      className={`${
+                        darkMode ? "text-gray-400" : "text-[#696969]"
+                      }`}
+                    >
+                      {formatTime(msg.timestamp)}
+                    </span>
                     {isMe && (
                       <span className="flex items-center space-x-1">
                         {msg.status === "sent" && <span>✓</span>}

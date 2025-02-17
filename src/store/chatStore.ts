@@ -36,6 +36,7 @@ interface ChatState {
   messages: Record<string, Message[]>;
   selectedChatId: string | null;
   currentUser: Participant;
+  darkMode: boolean;
 
   // Actions
   setSelectedChat: (id: string) => void;
@@ -55,6 +56,7 @@ interface ChatState {
   markAsRead: (conversationId: string) => void;
   setConversations: (conversations: Conversation[]) => void;
   setMessages: (messages: Record<string, Message[]>) => void;
+  toggleDarkMode: () => void;
 }
 
 export const useChatStore = create<ChatState>()(
@@ -64,13 +66,10 @@ export const useChatStore = create<ChatState>()(
       messages: {},
       selectedChatId: null,
       currentUser: { id: "me", name: "You", avatar: "/avatars/you.jpg" },
-
+      darkMode: false,
       setSelectedChat: (id) => set({ selectedChatId: id }),
-
       setConversations: (conversations) => set({ conversations }),
-
       setMessages: (messages) => set({ messages }),
-
       addConversation: (conversation) => {
         set((state) => ({
           conversations: [conversation, ...state.conversations],
@@ -80,7 +79,6 @@ export const useChatStore = create<ChatState>()(
           },
         }));
       },
-
       updateConversation: (id, updates) => {
         set((state) => ({
           conversations: state.conversations.map((conv) =>
@@ -88,22 +86,21 @@ export const useChatStore = create<ChatState>()(
           ),
         }));
       },
-
       addMessage: (conversationId, message) => {
         set((state) => {
           const conversationMessages = [
             ...(state.messages[conversationId] || []),
             message,
           ];
-      
+
           const updatedConversations = state.conversations.map((conv) => {
             if (conv.id === conversationId) {
               // Only increment unreadCount if the message is not from the current user
               // AND the conversation is not currently selected
-              const shouldIncrementUnread = 
-                message.sender.id !== "me" && 
+              const shouldIncrementUnread =
+                message.sender.id !== "me" &&
                 state.selectedChatId !== conversationId;
-              
+
               return {
                 ...conv,
                 lastMessage: message.content.text || "Sent an image",
@@ -115,7 +112,7 @@ export const useChatStore = create<ChatState>()(
             }
             return conv;
           });
-      
+
           return {
             messages: {
               ...state.messages,
@@ -125,7 +122,6 @@ export const useChatStore = create<ChatState>()(
           };
         });
       },
-
       updateMessage: (conversationId, messageId, updates) => {
         set((state) => {
           const updatedMessages =
@@ -141,7 +137,6 @@ export const useChatStore = create<ChatState>()(
           };
         });
       },
-
       toggleReaction: (conversationId, messageId, reactionType) => {
         set((state) => {
           const updatedMessages =
@@ -192,6 +187,9 @@ export const useChatStore = create<ChatState>()(
             conversations: updatedConversations,
           };
         });
+      },
+      toggleDarkMode: () => {
+        set((state) => ({ darkMode: !state.darkMode }));
       },
     }),
     {
