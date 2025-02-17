@@ -170,40 +170,90 @@ export default function ChatPage() {
   }: {
     messageId: string;
     currentReactions: Message["reactions"];
-  }) => (
-    <div className="absolute bottom-full mb-2 bg-white dark:bg-gray-700 rounded-full shadow-lg p-2 flex space-x-2 reaction-popup">
-      <button
-        onClick={() => handleReaction(messageId, "like")}
-        className={`hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-full transition-colors`}
+  }) => {
+    const [position, setPosition] = useState<"top" | "bottom">("top");
+    const [horizontalOffset, setHorizontalOffset] = useState<
+      "left" | "center" | "right"
+    >("center");
+    const popupRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (popupRef.current) {
+        const rect = popupRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const viewportWidth = window.innerWidth;
+        const HEADER_HEIGHT = 73;
+        const MARGIN = 10;
+
+        if (rect.top < HEADER_HEIGHT + MARGIN) {
+          setPosition("bottom");
+        } else if (rect.bottom > viewportHeight - MARGIN) {
+          setPosition("top");
+        } else {
+          setPosition("top");
+        }
+
+        if (rect.right > viewportWidth - MARGIN) {
+          setHorizontalOffset("left");
+        } else if (rect.left < MARGIN) {
+          setHorizontalOffset("right");
+        } else {
+          setHorizontalOffset("center");
+        }
+      }
+    }, [messageId]);
+
+    const getHorizontalClass = () => {
+      switch (horizontalOffset) {
+        case "left":
+          return "right-0 translate-x-0";
+        case "right":
+          return "left-0 translate-x-0";
+        default:
+          return "left-1/2 -translate-x-1/2";
+      }
+    };
+
+    return (
+      <div
+        ref={popupRef}
+        className={`absolute ${
+          position === "top" ? "bottom-full mb-2" : "top-full mt-2"
+        } ${getHorizontalClass()} bg-white dark:bg-gray-700 rounded-full shadow-lg p-2 flex space-x-2 reaction-popup z-50`}
       >
-        <FaThumbsUp
-          className={`${
-            currentReactions.like ? "text-blue-500" : "text-gray-400"
-          }`}
-        />
-      </button>
-      <button
-        onClick={() => handleReaction(messageId, "love")}
-        className={`hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-full transition-colors`}
-      >
-        <FaHeart
-          className={`${
-            currentReactions.love ? "text-red-500" : "text-gray-400"
-          }`}
-        />
-      </button>
-      <button
-        onClick={() => handleReaction(messageId, "laugh")}
-        className={`hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-full transition-colors`}
-      >
-        <FaLaugh
-          className={`${
-            currentReactions.laugh ? "text-yellow-500" : "text-gray-400"
-          }`}
-        />
-      </button>
-    </div>
-  );
+        <button
+          onClick={() => handleReaction(messageId, "like")}
+          className={`hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-full transition-colors`}
+        >
+          <FaThumbsUp
+            className={`${
+              currentReactions.like ? "text-blue-500" : "text-gray-400"
+            }`}
+          />
+        </button>
+        <button
+          onClick={() => handleReaction(messageId, "love")}
+          className={`hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-full transition-colors`}
+        >
+          <FaHeart
+            className={`${
+              currentReactions.love ? "text-red-500" : "text-gray-400"
+            }`}
+          />
+        </button>
+        <button
+          onClick={() => handleReaction(messageId, "laugh")}
+          className={`hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-full transition-colors`}
+        >
+          <FaLaugh
+            className={`${
+              currentReactions.laugh ? "text-yellow-500" : "text-gray-400"
+            }`}
+          />
+        </button>
+      </div>
+    );
+  };
 
   if (!currentConversation) {
     return (
@@ -277,7 +327,7 @@ export default function ChatPage() {
                 <div
                   className={`relative p-3 rounded-lg max-w-xs ${
                     isMe
-                      ? "bg-blue-500 dark:bg-blue-600 text-white"
+                      ? "bg-[#545556] text-white"
                       : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
                   }`}
                   onDoubleClick={() => setActiveReactionMessage(msg.id)}
