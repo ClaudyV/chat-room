@@ -13,6 +13,7 @@ export interface Conversation {
   lastMessage: string;
   timestamp: string;
   unreadCount?: number;
+  isTyping?: boolean;
 }
 
 type MessageStatus = "sent" | "delivered" | "read";
@@ -94,22 +95,27 @@ export const useChatStore = create<ChatState>()(
             ...(state.messages[conversationId] || []),
             message,
           ];
-
+      
           const updatedConversations = state.conversations.map((conv) => {
             if (conv.id === conversationId) {
+              // Only increment unreadCount if the message is not from the current user
+              // AND the conversation is not currently selected
+              const shouldIncrementUnread = 
+                message.sender.id !== "me" && 
+                state.selectedChatId !== conversationId;
+              
               return {
                 ...conv,
                 lastMessage: message.content.text || "Sent an image",
                 timestamp: message.timestamp,
-                unreadCount:
-                  message.sender.id !== "me"
-                    ? (conv.unreadCount || 0) + 1
-                    : conv.unreadCount,
+                unreadCount: shouldIncrementUnread
+                  ? (conv.unreadCount || 0) + 1
+                  : conv.unreadCount,
               };
             }
             return conv;
           });
-
+      
           return {
             messages: {
               ...state.messages,
@@ -217,8 +223,6 @@ export const initializeStore = async () => {
       conversations,
       messages,
     });
-
-    console.log("Chat store initialized with fetched data");
   } catch (error) {
     console.error("Error initializing chat store:", error);
   }

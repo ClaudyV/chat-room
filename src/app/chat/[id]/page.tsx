@@ -2,6 +2,10 @@
 
 import { FaHeart, FaImage, FaLaugh, FaThumbsUp, FaTimes } from "react-icons/fa";
 import { Message, useChatStore } from "@/store/chatStore";
+import {
+  simulateBackgroundActivity,
+  simulateResponse,
+} from "@/services/webSocketSimulation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
@@ -23,6 +27,7 @@ export default function ChatPage() {
   const [activeReactionMessage, setActiveReactionMessage] = useState<
     string | null
   >(null);
+  const [bgActivityInitialized, setBgActivityInitialized] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const currentChatId = id as string;
@@ -33,7 +38,15 @@ export default function ChatPage() {
   const currentConversation = conversations.find((c) => c.id === currentChatId);
 
   useEffect(() => {
+    if (!bgActivityInitialized) {
+      simulateBackgroundActivity();
+      setBgActivityInitialized(true);
+    }
+  }, [bgActivityInitialized]);
+
+  useEffect(() => {
     setSelectedChat(currentChatId);
+    // Mark messages as read when opening conversation
     markAsRead(currentChatId);
   }, [currentChatId, setSelectedChat, markAsRead]);
 
@@ -42,6 +55,7 @@ export default function ChatPage() {
   }, [currentMessages]);
 
   useEffect(() => {
+    // Close reaction popup when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (
         activeReactionMessage &&
@@ -94,6 +108,7 @@ export default function ChatPage() {
     setInput("");
     setImage(null);
     setImagePreview(null);
+    simulateResponse(currentChatId, input.trim() || "image");
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -198,20 +213,40 @@ export default function ChatPage() {
     );
   }
 
+  // Get the other participant
+  const otherParticipant = currentConversation.participants.find(
+    (p) => p.id !== "me"
+  );
+
+  if (!otherParticipant) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        Invalid conversation data
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-gray-800">
       {/* Chat Header */}
       <div className="p-4 bg-gray-100 dark:bg-gray-900 border-b flex items-center space-x-3">
         <Image
-          src={currentConversation.participants[1].avatar}
+          src={otherParticipant.avatar}
           width={40}
           height={40}
           className="w-10 h-10 rounded-full"
           alt="avatar"
         />
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          {currentConversation.participants[1].name}
-        </h2>
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            {otherParticipant.name}
+          </h2>
+          {currentConversation.isTyping && (
+            <p className="text-xs text-gray-500 dark:text-gray-400 animate-pulse">
+              typing...
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Chat Messages */}
@@ -242,7 +277,7 @@ export default function ChatPage() {
                 <div
                   className={`relative p-3 rounded-lg max-w-xs ${
                     isMe
-                      ? "bg-gray-100 dark:bg-gray-600 text-white"
+                      ? "bg-blue-500 dark:bg-blue-600 text-white"
                       : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
                   }`}
                   onDoubleClick={() => setActiveReactionMessage(msg.id)}
@@ -285,6 +320,38 @@ export default function ChatPage() {
             </div>
           );
         })}
+
+        {/* Typing indicator */}
+        {currentConversation.isTyping && (
+          <div className="flex justify-start">
+            <div className="flex items-start space-x-3">
+              <Image
+                src={otherParticipant.avatar}
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-full"
+                alt="avatar"
+              />
+              <div className="p-3 rounded-lg bg-gray-200 dark:bg-gray-700">
+                <div className="flex space-x-1">
+                  <div
+                    className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"
+                    style={{ animationDelay: "0ms" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"
+                    style={{ animationDelay: "150ms" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"
+                    style={{ animationDelay: "300ms" }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
 
