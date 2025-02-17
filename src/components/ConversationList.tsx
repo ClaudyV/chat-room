@@ -128,8 +128,12 @@ export default function ConversationList() {
             onClick={() => setSelectedChat(conv.id)}
             className={`flex justify-between items-center p-3 rounded-lg cursor-pointer transition-colors ${
               selectedChatId === conv.id
-                ? "bg-gray-300 dark:bg-gray-500"
-                : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                ? darkMode
+                  ? "bg-gray-500"
+                  : "bg-gray-300"
+                : darkMode
+                ? " hover:bg-gray-600"
+                : "hover:bg-gray-200"
             }`}
           >
             <div className="flex items-center space-x-3">
@@ -148,13 +152,7 @@ export default function ConversationList() {
                 ) : null}
               </div>
               <div>
-                <p
-                  className={`font-semibold ${
-                    selectedChatId === conv.id ? "text-white" : ""
-                  }`}
-                >
-                  {conv.participants[1].name}
-                </p>
+                <p className={"font-semibold"}>{conv.participants[1].name}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 truncate w-48">
                   {conv.lastMessage}
                 </p>

@@ -286,7 +286,7 @@ export default function ChatPage() {
       {/* Chat Header */}
       <div
         className={`p-4  border-b flex items-center space-x-3 ${
-          darkMode ? "bg-gray-100 dark:bg-gray-900" : "bg-white"
+          darkMode ? "bg-gray-100 dark:bg-gray-700" : "bg-white"
         }`}
       >
         <Image
@@ -405,7 +405,7 @@ export default function ChatPage() {
                 className="w-8 h-8 rounded-full"
                 alt="avatar"
               />
-              <div className="p-3 rounded-lg bg-gray-200 dark:bg-gray-700">
+              <div className={`p-3 rounded-lg bg-gray-200 dark:bg-gray-700`}>
                 <div className="flex space-x-1">
                   <div
                     className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"
@@ -429,7 +429,7 @@ export default function ChatPage() {
       </div>
 
       {/* Input Area with Image Preview */}
-      <div className="p-3 border-t bg-white dark:bg-gray-800">
+      <div className={`p-3 border-t ${darkMode ? "bg-gray-800" : "bg-white"}`}>
         {imagePreview && (
           <div className="relative inline-block mb-2">
             <Image
@@ -450,7 +450,9 @@ export default function ChatPage() {
         <div className="flex">
           <input
             type="text"
-            className="flex-1 p-2 border rounded-md dark:bg-gray-700 dark:text-white"
+            className={`flex-1 p-2 border rounded-md ${
+              darkMode ? "bg-gray-700 text-white" : "text-black"
+            }`}
             placeholder="Type a message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
