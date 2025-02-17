@@ -1,0 +1,178 @@
+{
+  "1": [
+    {
+      "id": "m1",
+      "sender": { "id": "me", "name": "Alice", "avatar": "/avatars/alice.jpg" },
+      "content": { "text": "Hey, how's it going?" },
+      "timestamp": "2025-02-15T12:34:56Z",
+      "reactions": { "like": true, "love": true },
+      "status": "sent"
+    },
+    {
+      "id": "m2",
+      "sender": {
+        "id": "u2",
+        "name": "Bob",
+        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+      },
+      "content": { "text": "Hey Alice! I'm doing great, how about you?" },
+      "timestamp": "2025-02-15T12:35:10Z",
+      "reactions": { "like": false, "love": false, "laugh": false },
+      "status": "read"
+    },
+    {
+      "id": "m3",
+      "sender": { "id": "me", "name": "Alice", "avatar": "/avatars/alice.jpg" },
+      "content": { "text": "Just chilling. Want to grab a coffee later?" },
+      "timestamp": "2025-02-15T12:36:00Z",
+      "reactions": { "love": true, "like": false, "laugh": false },
+      "status": "delivered"
+    },
+    {
+      "id": "m4",
+      "sender": {
+        "id": "u2",
+        "name": "Bob",
+        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+      },
+      "content": {
+        "image": "https://conceptualminds.com/wp-content/uploads/2024/09/ai-generated-8223835_1280-1024x683.jpg"
+      },
+      "timestamp": "2025-02-15T12:37:20Z",
+      "reactions": { "laugh": true, "like": true, "love": false },
+      "status": "sent"
+    },
+    {
+      "id": "m5",
+      "sender": {
+        "id": "system",
+        "name": "System",
+        "avatar": "https://thumbs.dreamstime.com/b/astronaut-portrait-thin-line-icon-avatar-cosmonaut-system-vector-illustration-isolated-white-spaceman-outline-astronaut-123965986.jpg"
+      },
+      "content": { "text": "Alice and Bob are now friends." },
+      "timestamp": "2025-02-15T12:38:00Z",
+      "reactions": { "like": false, "love": false, "laugh": false },
+      "status": "read"
+    },
+    {
+      "id": "m6",
+      "sender": { "id": "me", "name": "Alice", "avatar": "/avatars/alice.jpg" },
+      "content": { "text": "Haha, nice one. Let's go at 3 PM?" },
+      "timestamp": "2025-02-15T12:39:10Z",
+      "reactions": { "like": true, "love": false, "laugh": false },
+      "status": "sent"
+    },
+    {
+      "id": "m7",
+      "sender": {
+        "id": "u2",
+        "name": "Bob",
+        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+      },
+      "content": { "text": "Sounds great! See you then. ☕" },
+      "timestamp": "2025-02-15T12:40:00Z",
+      "reactions": { "love": true, "like": false, "laugh": false },
+      "status": "read"
+    }
+  ],
+  "2": [
+    {
+      "id": "m1",
+      "sender": {
+        "id": "me",
+        "name": "Charlie",
+        "avatar": "/avatars/charlie.jpg"
+      },
+      "content": { "text": "Hey, did you check out the new movie?" },
+      "timestamp": "2025-02-15T13:00:00Z",
+      "reactions": { "like": true, "love": false, "laugh": false },
+      "status": "sent"
+    },
+    {
+      "id": "m2",
+      "sender": {
+        "id": "u4",
+        "name": "David",
+        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
+      },
+      "content": { "text": "Yeah! It was amazing! 🎬" },
+      "timestamp": "2025-02-15T13:02:30Z",
+      "reactions": { "love": true, "laugh": true, "like": false },
+      "status": "delivered"
+    },
+    {
+      "id": "m3",
+      "sender": {
+        "id": "me",
+        "name": "Charlie",
+        "avatar": "/avatars/charlie.jpg"
+      },
+      "content": { "text": "That plot twist though 😲" },
+      "timestamp": "2025-02-15T13:05:45Z",
+      "reactions": { "laugh": true, "like": true, "love": false },
+      "status": "read"
+    },
+    {
+      "id": "m4",
+      "sender": {
+        "id": "u4",
+        "name": "David",
+        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
+      },
+      "content": { "text": "Yeah, I didn't see that coming! 🤯" },
+      "timestamp": "2025-02-15T13:07:10Z",
+      "reactions": { "love": true, "like": false, "laugh": false },
+      "status": "sent"
+    },
+    {
+      "id": "m5",
+      "sender": {
+        "id": "me",
+        "name": "Charlie",
+        "avatar": "/avatars/charlie.jpg"
+      },
+      "content": {
+        "image": "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/08/original-avengers-team-in-phase-1-s-the-avengers.jpg"
+      },
+      "timestamp": "2025-02-15T13:10:00Z",
+      "reactions": { "laugh": true, "like": true, "love": false },
+      "status": "delivered"
+    },
+    {
+      "id": "m6",
+      "sender": {
+        "id": "system",
+        "name": "System",
+        "avatar": "https://thumbs.dreamstime.com/b/astronaut-portrait-thin-line-icon-avatar-cosmonaut-system-vector-illustration-isolated-white-spaceman-outline-astronaut-123965986.jpg"
+      },
+      "content": { "text": "Charlie and David watched a movie together." },
+      "timestamp": "2025-02-15T13:12:00Z",
+      "reactions": { "like": false, "love": false, "laugh": false },
+      "status": "read"
+    },
+    {
+      "id": "m7",
+      "sender": {
+        "id": "u4",
+        "name": "David",
+        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
+      },
+      "content": { "text": "We should watch another one soon! 🍿" },
+      "timestamp": "2025-02-15T13:15:45Z",
+      "reactions": { "like": true, "love": true, "laugh": false },
+      "status": "sent"
+    },
+    {
+      "id": "m8",
+      "sender": {
+        "id": "me",
+        "name": "Charlie",
+        "avatar": "/avatars/charlie.jpg"
+      },
+      "content": { "text": "Definitely! How about next Friday?" },
+      "timestamp": "2025-02-15T13:18:30Z",
+      "reactions": { "like": true, "love": false, "laugh": false },
+      "status": "delivered"
+    }
+  ]
+}
