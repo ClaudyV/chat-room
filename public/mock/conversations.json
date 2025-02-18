@@ -1,28 +1,172 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "participants": [
-      { "id": "me", "name": "Me", "avatar": "/avatars/alice.jpg" },
       {
-        "id": "u2",
-        "name": "Bob",
-        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+        "userId": 4,
+        "user": "David",
+        "avatar": "https://i.pravatar.cc/150?img=4"
+      },
+      {
+        "userId": 2,
+        "user": "Bob",
+        "avatar": "https://i.pravatar.cc/150?img=2"
       }
     ],
-    "lastMessage": "Sounds great! See you then. ☕",
-    "timestamp": "2025-02-15T12:34:56Z"
+    "lastMessage": "React is amazing!",
+    "timestamp": 1739016600000
   },
   {
-    "id": "2",
+    "id": 2,
     "participants": [
-      { "id": "me", "name": "Me", "avatar": "/avatars/alice.jpg" },
       {
-        "id": "u3",
-        "name": "Charlie",
-        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
+        "userId": 1,
+        "user": "Alice",
+        "avatar": "https://i.pravatar.cc/150?img=1"
+      },
+      {
+        "userId": 3,
+        "user": "Charlie",
+        "avatar": "https://i.pravatar.cc/150?img=3"
       }
     ],
-    "lastMessage": "Definitely! How about next Friday?",
-    "timestamp": "2025-02-15T12:34:56Z"
+    "lastMessage": "System message: A user has joined the conversation!",
+    "timestamp": 1739017200000
+  },
+  {
+    "id": 3,
+    "participants": [
+      {
+        "userId": 2,
+        "user": "Bob",
+        "avatar": "https://i.pravatar.cc/150?img=2"
+      },
+      {
+        "userId": 3,
+        "user": "Charlie",
+        "avatar": "https://i.pravatar.cc/150?img=3"
+      }
+    ],
+    "lastMessage": "What's your favorite editor?",
+    "timestamp": 1739017800000
+  },
+  {
+    "id": 4,
+    "participants": [
+      {
+        "userId": 1,
+        "user": "Alice",
+        "avatar": "https://i.pravatar.cc/150?img=1"
+      },
+      {
+        "userId": 2,
+        "user": "Bob",
+        "avatar": "https://i.pravatar.cc/150?img=2"
+      }
+    ],
+    "lastMessage": "Are you using server-side rendering?",
+    "timestamp": 1739018400000
+  },
+  {
+    "id": 5,
+    "participants": [
+      {
+        "userId": 5,
+        "user": "Emma",
+        "avatar": "https://i.pravatar.cc/150?img=5"
+      },
+      {
+        "userId": 4,
+        "user": "David",
+        "avatar": "https://i.pravatar.cc/150?img=4"
+      }
+    ],
+    "lastMessage": "You sent a picture",
+    "timestamp": 1739019000000
+  },
+  {
+    "id": 6,
+    "participants": [
+      {
+        "userId": 1,
+        "user": "Alice",
+        "avatar": "https://i.pravatar.cc/150?img=1"
+      },
+      {
+        "userId": 2,
+        "user": "Bob",
+        "avatar": "https://i.pravatar.cc/150?img=2"
+      }
+    ],
+    "lastMessage": "What's your favorite programming language?",
+    "timestamp": 1739019600000
+  },
+  {
+    "id": 7,
+    "participants": [
+      {
+        "userId": 5,
+        "user": "Emma",
+        "avatar": "https://i.pravatar.cc/150?img=5"
+      },
+      {
+        "userId": 4,
+        "user": "David",
+        "avatar": "https://i.pravatar.cc/150?img=4"
+      }
+    ],
+    "lastMessage": "Redux or Zustand?",
+    "timestamp": 1739020200000
+  },
+  {
+    "id": 8,
+    "participants": [
+      {
+        "userId": 1,
+        "user": "Alice",
+        "avatar": "https://i.pravatar.cc/150?img=1"
+      },
+      {
+        "userId": 3,
+        "user": "Charlie",
+        "avatar": "https://i.pravatar.cc/150?img=3"
+      }
+    ],
+    "lastMessage": "Redux or Zustand?",
+    "timestamp": 1739020800000
+  },
+  {
+    "id": 9,
+    "participants": [
+      {
+        "userId": 1,
+        "user": "Alice",
+        "avatar": "https://i.pravatar.cc/150?img=1"
+      },
+      {
+        "userId": 3,
+        "user": "Charlie",
+        "avatar": "https://i.pravatar.cc/150?img=3"
+      }
+    ],
+    "lastMessage": "Svelte is underrated.",
+    "timestamp": 1739021400000
+  },
+  {
+    "id": 10,
+    "participants": [
+      {
+        "userId": 5,
+        "user": "Emma",
+        "avatar": "https://i.pravatar.cc/150?img=5"
+      },
+      {
+        "userId": 1,
+        "user": "Alice",
+        "avatar": "https://i.pravatar.cc/150?img=1"
+      }
+    ],
+    "lastMessage": "Open-source contributions are fun!",
+    "timestamp": 1739022000000
   }
 ]

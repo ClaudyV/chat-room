@@ -2,11 +2,11 @@
 
 import { Conversation, useChatStore } from "@/store/chatStore";
 import { FaMoon, FaPlus, FaSun } from "react-icons/fa";
-import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function ConversationList() {
   const router = useRouter();
@@ -22,17 +22,8 @@ export default function ConversationList() {
   const [showNewChatForm, setShowNewChatForm] = useState(false);
   const [newContactName, setNewContactName] = useState("");
 
-  // Apply dark mode class to the `html` tag
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
-
   // Format the timestamp
-  const formatTime = (timestamp: string) => {
+  const formatTime = (timestamp: number) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
@@ -44,15 +35,15 @@ export default function ConversationList() {
     const newConversation: Conversation = {
       id: newId,
       participants: [
-        currentUser,
         {
           id: `user${Date.now()}`,
           name: newContactName,
           avatar: "https://cdn-icons-png.flaticon.com/512/3541/3541871.png",
         },
+        currentUser,
       ],
       lastMessage: "Start a new conversation",
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().getTime(),
       unreadCount: 0,
     };
 
@@ -128,7 +119,7 @@ export default function ConversationList() {
             <div
               onClick={() => setSelectedChat(conv.id)}
               className={`flex justify-between items-center p-3 mb-2 rounded-lg cursor-pointer transition-colors ${
-                selectedChatId === conv.id
+                selectedChatId === conv.id.toString()
                   ? darkMode
                     ? "bg-gray-500"
                     : "bg-gray-300"
@@ -140,7 +131,7 @@ export default function ConversationList() {
               <div className="flex items-center space-x-3">
                 <div className="relative flex-shrink-0">
                   <Image
-                    src={conv.participants[1].avatar}
+                    src={conv.participants[0].avatar}
                     width={40}
                     height={40}
                     className="rounded-full"
@@ -154,15 +145,15 @@ export default function ConversationList() {
                 </div>
                 <div className="min-w-0">
                   <p className="font-semibold truncate">
-                    {conv.participants[1].name}
+                    {conv.participants[0].name}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate w-full sm:w-32 md:w-40 lg:w-48">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate w-[10rem] sm:w-30 md:w-36 lg:w-[9rem] xl:w-[12rem]">
                     {conv.lastMessage}
                   </p>
                 </div>
               </div>
 
-              <p className="text-xs text-gray-500 dark:text-gray-400 flex-shrink-0 ml-2">
+              <p className="text-xs text-gray-500 dark:text-gray-400 flex-shrink-0 mr-2 mb-4">
                 {formatTime(conv.timestamp)}
               </p>
             </div>

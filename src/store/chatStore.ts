@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface Participant {
+export interface Participant {
   id: string;
   name: string;
   avatar: string;
@@ -11,9 +11,20 @@ export interface Conversation {
   id: string;
   participants: Participant[];
   lastMessage: string;
-  timestamp: string;
+  timestamp: number;
   unreadCount?: number;
   isTyping?: boolean;
+}
+
+interface JsonConversation {
+  id: number;
+  participants: {
+    userId: number;
+    user: string;
+    avatar: string;
+  }[];
+  lastMessage: string;
+  timestamp: number;
 }
 
 type MessageStatus = "sent" | "delivered" | "read";
@@ -24,10 +35,33 @@ export interface Message {
   content: {
     text?: string;
     image?: string;
+    system?: string;
   };
-  timestamp: string;
-  reactions: Record<"like" | "love" | "laugh", boolean>;
+  timestamp: number;
+  reactions: {
+    like: number;
+    love: number;
+    laugh: number;
+  };
   status: "sent" | "delivered" | "read";
+}
+
+export interface JsonMessage {
+  id: string;
+  conversationId: number | string;
+  userId: number | string;
+  user: string;
+  avatar: string;
+  messageType: "text" | "image" | "system";
+  message: string;
+  image?: string;
+  reactions: {
+    like: number;
+    love: number;
+    laugh: number;
+  };
+  timestamp: number;
+  status?: "sent" | "delivered" | "read";
 }
 
 interface ChatState {
@@ -65,10 +99,36 @@ export const useChatStore = create<ChatState>()(
       conversations: [],
       messages: {},
       selectedChatId: null,
-      currentUser: { id: "me", name: "You", avatar: "/avatars/you.jpg" },
-      darkMode: false,
-      setSelectedChat: (id) => set({ selectedChatId: id }),
-      setConversations: (conversations) => set({ conversations }),
+      currentUser: { id: "me", name: "You", avatar: "/avatars/you.jpg" }, // Default
+      darkMode: true,
+      setSelectedChat: (id) => {
+        set((state) => {
+          const selectedConversation = state.conversations.find(
+            (conv) => conv.id === id
+          );
+
+          if (
+            selectedConversation &&
+            selectedConversation.participants.length >= 2
+          ) {
+            return {
+              selectedChatId: id,
+              currentUser: selectedConversation.participants[1],
+            };
+          }
+
+          return { selectedChatId: id };
+        });
+      },
+      setConversations: (conversations) => {
+        const firstConversation = conversations[0];
+        if (firstConversation && firstConversation.participants.length >= 2) {
+          set({
+            currentUser: firstConversation.participants[1],
+          });
+        }
+        set({ conversations });
+      },
       setMessages: (messages) => set({ messages }),
       addConversation: (conversation) => {
         set((state) => ({
@@ -95,10 +155,8 @@ export const useChatStore = create<ChatState>()(
 
           const updatedConversations = state.conversations.map((conv) => {
             if (conv.id === conversationId) {
-              // Only increment unreadCount if the message is not from the current user
-              // AND the conversation is not currently selected
               const shouldIncrementUnread =
-                message.sender.id !== "me" &&
+                message.sender.id !== state.currentUser.id &&
                 state.selectedChatId !== conversationId;
 
               return {
@@ -146,7 +204,7 @@ export const useChatStore = create<ChatState>()(
                   ...msg,
                   reactions: {
                     ...msg.reactions,
-                    [reactionType]: !msg.reactions[reactionType],
+                    [reactionType]: msg.reactions[reactionType] + 1,
                   },
                 };
               }
@@ -214,14 +272,93 @@ export const initializeStore = async () => {
       throw new Error("Failed to fetch data");
     }
 
-    const conversations: Conversation[] = await conversationsResponse.json();
-    const messages: Record<string, Message[]> = await messagesResponse.json();
+    const conversations: JsonConversation[] =
+      await conversationsResponse.json();
+    const jsonMessages: JsonMessage[] = await messagesResponse.json();
+
+    const transformedConversations = transformConversations(conversations);
+    const transformedMessages = transformMessages(jsonMessages, conversations);
 
     useChatStore.setState({
-      conversations,
-      messages,
+      conversations: transformedConversations,
+      messages: transformedMessages,
     });
   } catch (error) {
     console.error("Error initializing chat store:", error);
   }
 };
+
+export function transformMessages(
+  jsonMessages: JsonMessage[],
+  conversations: JsonConversation[]
+): Record<string, Message[]> {
+  const messagesByConversation: Record<string, JsonMessage[]> = {};
+
+  jsonMessages.forEach((msg) => {
+    const convId = `${msg.conversationId}`;
+    if (!messagesByConversation[convId]) {
+      messagesByConversation[convId] = [];
+    }
+    messagesByConversation[convId].push(msg);
+  });
+
+  const transformedMessages: Record<string, Message[]> = {};
+
+  Object.keys(messagesByConversation).forEach((convId) => {
+    const conversation = conversations.find((c) => `${c.id}` === convId);
+    if (!conversation) return;
+
+    const currentUser = conversation.participants[1];
+
+    transformedMessages[convId] = messagesByConversation[convId].map((msg) => {
+      const isCurrentUser = msg.userId === currentUser.userId;
+
+      const sender: Participant = isCurrentUser
+        ? {
+            id: currentUser.userId.toString(),
+            name: currentUser.user,
+            avatar: currentUser.avatar,
+          }
+        : {
+            id: conversation.participants[0].userId.toString(),
+            name: conversation.participants[0].user,
+            avatar: conversation.participants[0].avatar,
+          };
+
+      return {
+        id: `msg_${msg.timestamp}`,
+        sender,
+        content:
+          msg.messageType === "text"
+            ? { text: msg.message }
+            : msg.messageType === "system"
+            ? { system: msg.message }
+            : { image: msg.message },
+        timestamp: msg.timestamp,
+        reactions: msg.reactions,
+        status: isCurrentUser ? "delivered" : "sent",
+      };
+    });
+  });
+  return transformedMessages;
+}
+
+function transformConversations(
+  conversations: JsonConversation[]
+): Conversation[] {
+  return conversations.map((conv) => {
+    const participants = conv.participants.map((participant) => {
+      return {
+        id: participant.userId.toString(),
+        name: participant.user,
+        avatar: participant.avatar,
+      };
+    });
+    return {
+      ...conv,
+      id: conv.id.toString(),
+      timestamp: conv.timestamp,
+      participants,
+    };
+  });
+}

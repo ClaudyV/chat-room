@@ -1,4 +1,4 @@
-import { Message, useChatStore } from "@/store/chatStore";
+import { Message, Participant, useChatStore } from "@/store/chatStore";
 
 // Mock responses for different conversation types
 const MOCK_RESPONSES: Record<string, string[]> = {
@@ -43,14 +43,15 @@ const getRandomResponse = (name: string): string => {
 // Generate a simulated response with typing indicator
 export const simulateResponse = (
   conversationId: string,
-  senderMessage: string
+  senderMessage: string,
+  currentUser: Participant
 ) => {
   const store = useChatStore.getState();
   const conversation = store.conversations.find((c) => c.id === conversationId);
 
   if (!conversation) return;
 
-  const sender = conversation.participants.find((p) => p.id !== "me");
+  const sender = conversation.participants.find((p) => p.id !== currentUser.id);
   if (!sender) return;
 
   store.updateConversation(conversationId, {
@@ -68,8 +69,8 @@ export const simulateResponse = (
       id: `msg_${Date.now()}`,
       sender: sender,
       content: { text: responseText },
-      timestamp: new Date().toISOString(),
-      reactions: { like: false, love: false, laugh: false },
+      timestamp: new Date().getTime(),
+      reactions: { like: 0, love: 0, laugh: 0 },
       status: "sent",
     };
 
@@ -94,7 +95,7 @@ export const simulateResponse = (
 // Simulate automatic responses for inactive chats (to create the illusion of active conversations)
 export const simulateBackgroundActivity = () => {
   const store = useChatStore.getState();
-  const { conversations, selectedChatId } = store;
+  const { conversations, selectedChatId, currentUser } = store;
 
   const runSimulation = () => {
     const inactiveChats = conversations.filter(
@@ -105,15 +106,17 @@ export const simulateBackgroundActivity = () => {
       const randomIndex = Math.floor(Math.random() * inactiveChats.length);
       const randomChat = inactiveChats[randomIndex];
 
-      const sender = randomChat.participants.find((p) => p.id !== "me");
+      const sender = randomChat.participants.find(
+        (p) => p.id !== currentUser.id
+      );
       if (!sender) return;
 
       const newMessage: Message = {
         id: `msg_${Date.now()}`,
         sender: sender,
         content: { text: getRandomResponse(sender.name) },
-        timestamp: new Date().toISOString(),
-        reactions: { like: false, love: false, laugh: false },
+        timestamp: new Date().getTime(),
+        reactions: { like: 0, love: 0, laugh: 0 },
         status: "sent",
       };
 

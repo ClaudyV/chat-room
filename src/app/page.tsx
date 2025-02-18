@@ -11,12 +11,10 @@ export default function Home() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Effect to handle resize and determine if we're on mobile
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768;
+      const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
-      // Auto-hide sidebar on mobile
       if (mobile) {
         setShowSidebar(false);
       } else {
@@ -24,7 +22,6 @@ export default function Home() {
       }
     };
 
-    // Set initial state
     handleResize();
 
     window.addEventListener("resize", handleResize);
@@ -40,11 +37,11 @@ export default function Home() {
       {/* Sidebar - Conversation List */}
       <aside
         className={`
-                fixed md:static left-0 top-0 bottom-0
+                fixed lg:static left-0 top-0 bottom-0
                 ${
                   showSidebar
                     ? "translate-x-0"
-                    : "-translate-x-full md:translate-x-0"
+                    : "-translate-x-full lg:translate-x-0"
                 } 
                 transition-transform duration-300 ease-in-out 
                 z-40
@@ -54,7 +51,6 @@ export default function Home() {
       >
         <ConversationList />
 
-        {/* Close button for mobile */}
         {isMobile && (
           <button
             onClick={toggleSidebar}
@@ -76,7 +72,6 @@ export default function Home() {
           darkMode ? "bg-gray-800" : "bg-white"
         }`}
       >
-        {/* Mobile Menu Button */}
         {isMobile && (
           <button
             onClick={toggleSidebar}
@@ -96,7 +91,7 @@ export default function Home() {
           <NoChatSelected />
         </div>
       </main>
-      {/* Overlay when sidebar is open on mobile */}
+      
       {isMobile && showSidebar && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30"

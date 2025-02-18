@@ -1,178 +1,1402 @@
-{
-  "1": [
-    {
-      "id": "m1",
-      "sender": { "id": "me", "name": "Alice", "avatar": "/avatars/alice.jpg" },
-      "content": { "text": "Hey, how's it going?" },
-      "timestamp": "2025-02-15T12:34:56Z",
-      "reactions": { "like": true, "love": true },
-      "status": "sent"
+[
+  {
+    "conversationId": 1,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Jest vs Cypress?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 0
     },
-    {
-      "id": "m2",
-      "sender": {
-        "id": "u2",
-        "name": "Bob",
-        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
-      },
-      "content": { "text": "Hey Alice! I'm doing great, how about you?" },
-      "timestamp": "2025-02-15T12:35:10Z",
-      "reactions": { "like": false, "love": false, "laugh": false },
-      "status": "read"
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 1,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Redux or Zustand?",
+    "reactions": {
+      "like": 5,
+      "love": 3,
+      "laugh": 0
     },
-    {
-      "id": "m3",
-      "sender": { "id": "me", "name": "Alice", "avatar": "/avatars/alice.jpg" },
-      "content": { "text": "Just chilling. Want to grab a coffee later?" },
-      "timestamp": "2025-02-15T12:36:00Z",
-      "reactions": { "love": true, "like": false, "laugh": false },
-      "status": "delivered"
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 1,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Jest vs Cypress?",
+    "reactions": {
+      "like": 0,
+      "love": 0,
+      "laugh": 0
     },
-    {
-      "id": "m4",
-      "sender": {
-        "id": "u2",
-        "name": "Bob",
-        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
-      },
-      "content": {
-        "image": "https://conceptualminds.com/wp-content/uploads/2024/09/ai-generated-8223835_1280-1024x683.jpg"
-      },
-      "timestamp": "2025-02-15T12:37:20Z",
-      "reactions": { "laugh": true, "like": true, "love": false },
-      "status": "sent"
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 1,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "How's it going?",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 1
     },
-    {
-      "id": "m5",
-      "sender": {
-        "id": "system",
-        "name": "System",
-        "avatar": "https://thumbs.dreamstime.com/b/astronaut-portrait-thin-line-icon-avatar-cosmonaut-system-vector-illustration-isolated-white-spaceman-outline-astronaut-123965986.jpg"
-      },
-      "content": { "text": "Alice and Bob are now friends." },
-      "timestamp": "2025-02-15T12:38:00Z",
-      "reactions": { "like": false, "love": false, "laugh": false },
-      "status": "read"
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 1,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Any book recommendations for developers?",
+    "reactions": {
+      "like": 2,
+      "love": 2,
+      "laugh": 0
     },
-    {
-      "id": "m6",
-      "sender": { "id": "me", "name": "Alice", "avatar": "/avatars/alice.jpg" },
-      "content": { "text": "Haha, nice one. Let's go at 3 PM?" },
-      "timestamp": "2025-02-15T12:39:10Z",
-      "reactions": { "like": true, "love": false, "laugh": false },
-      "status": "sent"
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 1,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "I'm building a new side project.",
+    "reactions": {
+      "like": 5,
+      "love": 2,
+      "laugh": 1
     },
-    {
-      "id": "m7",
-      "sender": {
-        "id": "u2",
-        "name": "Bob",
-        "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
-      },
-      "content": { "text": "Sounds great! See you then. ☕" },
-      "timestamp": "2025-02-15T12:40:00Z",
-      "reactions": { "love": true, "like": false, "laugh": false },
-      "status": "read"
-    }
-  ],
-  "2": [
-    {
-      "id": "m1",
-      "sender": {
-        "id": "me",
-        "name": "Charlie",
-        "avatar": "/avatars/charlie.jpg"
-      },
-      "content": { "text": "Hey, did you check out the new movie?" },
-      "timestamp": "2025-02-15T13:00:00Z",
-      "reactions": { "like": true, "love": false, "laugh": false },
-      "status": "sent"
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 1,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "What's your favorite editor?",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 1
     },
-    {
-      "id": "m2",
-      "sender": {
-        "id": "u4",
-        "name": "David",
-        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
-      },
-      "content": { "text": "Yeah! It was amazing! 🎬" },
-      "timestamp": "2025-02-15T13:02:30Z",
-      "reactions": { "love": true, "laugh": true, "like": false },
-      "status": "delivered"
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 1,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "What's your favorite editor?",
+    "reactions": {
+      "like": 0,
+      "love": 0,
+      "laugh": 1
     },
-    {
-      "id": "m3",
-      "sender": {
-        "id": "me",
-        "name": "Charlie",
-        "avatar": "/avatars/charlie.jpg"
-      },
-      "content": { "text": "That plot twist though 😲" },
-      "timestamp": "2025-02-15T13:05:45Z",
-      "reactions": { "laugh": true, "like": true, "love": false },
-      "status": "read"
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 1,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "I'm building a new side project.",
+    "reactions": {
+      "like": 0,
+      "love": 0,
+      "laugh": 2
     },
-    {
-      "id": "m4",
-      "sender": {
-        "id": "u4",
-        "name": "David",
-        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
-      },
-      "content": { "text": "Yeah, I didn't see that coming! 🤯" },
-      "timestamp": "2025-02-15T13:07:10Z",
-      "reactions": { "love": true, "like": false, "laugh": false },
-      "status": "sent"
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 1,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "React is amazing!",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 2
     },
-    {
-      "id": "m5",
-      "sender": {
-        "id": "me",
-        "name": "Charlie",
-        "avatar": "/avatars/charlie.jpg"
-      },
-      "content": {
-        "image": "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/08/original-avengers-team-in-phase-1-s-the-avengers.jpg"
-      },
-      "timestamp": "2025-02-15T13:10:00Z",
-      "reactions": { "laugh": true, "like": true, "love": false },
-      "status": "delivered"
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 2,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Firebase is great for real-time apps.",
+    "reactions": {
+      "like": 1,
+      "love": 3,
+      "laugh": 0
     },
-    {
-      "id": "m6",
-      "sender": {
-        "id": "system",
-        "name": "System",
-        "avatar": "https://thumbs.dreamstime.com/b/astronaut-portrait-thin-line-icon-avatar-cosmonaut-system-vector-illustration-isolated-white-spaceman-outline-astronaut-123965986.jpg"
-      },
-      "content": { "text": "Charlie and David watched a movie together." },
-      "timestamp": "2025-02-15T13:12:00Z",
-      "reactions": { "like": false, "love": false, "laugh": false },
-      "status": "read"
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 2,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "What's your favorite programming language?",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 2
     },
-    {
-      "id": "m7",
-      "sender": {
-        "id": "u4",
-        "name": "David",
-        "avatar": "https://img.freepik.com/premium-vector/avatar-icon002_750950-52.jpg"
-      },
-      "content": { "text": "We should watch another one soon! 🍿" },
-      "timestamp": "2025-02-15T13:15:45Z",
-      "reactions": { "like": true, "love": true, "laugh": false },
-      "status": "sent"
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 2,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Open-source contributions are fun!",
+    "reactions": {
+      "like": 5,
+      "love": 1,
+      "laugh": 0
     },
-    {
-      "id": "m8",
-      "sender": {
-        "id": "me",
-        "name": "Charlie",
-        "avatar": "/avatars/charlie.jpg"
-      },
-      "content": { "text": "Definitely! How about next Friday?" },
-      "timestamp": "2025-02-15T13:18:30Z",
-      "reactions": { "like": true, "love": false, "laugh": false },
-      "status": "delivered"
-    }
-  ]
-}
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 2,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Have you used Next.js?",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 2,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Let's meet up sometime!",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 2,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "How do you test your frontend?",
+    "reactions": {
+      "like": 1,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 2,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "I love working with WebSockets.",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 2,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "What's your favorite programming language?",
+    "reactions": {
+      "like": 5,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 2,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Any good DevOps tips?",
+    "reactions": {
+      "like": 1,
+      "love": 3,
+      "laugh": 2
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 2,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "system",
+    "message": "System message: A user has joined the conversation!",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Let's meet up sometime!",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Svelte is underrated.",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 3,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Do you like writing documentation?",
+    "reactions": {
+      "like": 0,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Nice to meet you!",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 0
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 3,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Do you deploy with Vercel or Netlify?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 1
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/3_5/200/300",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Any good DevOps tips?",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 3,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/3_7/200/300",
+    "reactions": {
+      "like": 4,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Tailwind CSS is awesome!",
+    "reactions": {
+      "like": 3,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 3,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "What's your favorite editor?",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 4,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Hello!",
+    "reactions": {
+      "like": 0,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 4,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Good morning!",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 4,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Jest vs Cypress?",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 4,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "system",
+    "message": "System message: A user has joined the conversation!",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 4,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Hello!",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 4,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Any book recommendations for developers?",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 4,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "TypeScript or JavaScript?",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 2
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 4,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Do you deploy with Vercel or Netlify?",
+    "reactions": {
+      "like": 5,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 4,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Have you used Next.js?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 4,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Are you using server-side rendering?",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Open-source contributions are fun!",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/5_1/200/300",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 0
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Nice to meet you!",
+    "reactions": {
+      "like": 3,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Ever tried GraphQL?",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "What's your favorite editor?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "system",
+    "message": "System message: A user has joined the conversation!",
+    "reactions": {
+      "like": 5,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "TypeScript or JavaScript?",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Good morning!",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 5,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Any good DevOps tips?",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 5,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/5_9/200/300",
+    "reactions": {
+      "like": 3,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 6,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "I'm building a new side project.",
+    "reactions": {
+      "like": 4,
+      "love": 0,
+      "laugh": 0
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 6,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Firebase is great for real-time apps.",
+    "reactions": {
+      "like": 3,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 6,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "system",
+    "message": "System message: A user has joined the conversation!",
+    "reactions": {
+      "like": 5,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 6,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "system",
+    "message": "System message: A user has joined the conversation!",
+    "reactions": {
+      "like": 3,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 6,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Any good DevOps tips?",
+    "reactions": {
+      "like": 5,
+      "love": 2,
+      "laugh": 1
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 6,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Firebase is great for real-time apps.",
+    "reactions": {
+      "like": 0,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 6,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Tailwind CSS is awesome!",
+    "reactions": {
+      "like": 1,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 6,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "How do you handle state management?",
+    "reactions": {
+      "like": 2,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 6,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "Ever tried GraphQL?",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 6,
+    "userId": 2,
+    "user": "Bob",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "messageType": "text",
+    "message": "What's your favorite programming language?",
+    "reactions": {
+      "like": 0,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 7,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Ever tried GraphQL?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 7,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Firebase is great for real-time apps.",
+    "reactions": {
+      "like": 5,
+      "love": 1,
+      "laugh": 2
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 7,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Microservices vs Monolith?",
+    "reactions": {
+      "like": 1,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 7,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Do you deploy with Vercel or Netlify?",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 7,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Have you used Next.js?",
+    "reactions": {
+      "like": 3,
+      "love": 3,
+      "laugh": 2
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 7,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Microservices vs Monolith?",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 7,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Hello!",
+    "reactions": {
+      "like": 5,
+      "love": 3,
+      "laugh": 2
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 7,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Any book recommendations for developers?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 1
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 7,
+    "userId": 4,
+    "user": "David",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "messageType": "text",
+    "message": "Ever tried GraphQL?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 1
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 7,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Redux or Zustand?",
+    "reactions": {
+      "like": 3,
+      "love": 3,
+      "laugh": 0
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 8,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Hello!",
+    "reactions": {
+      "like": 3,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 8,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "How do you handle state management?",
+    "reactions": {
+      "like": 0,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 8,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Redux or Zustand?",
+    "reactions": {
+      "like": 2,
+      "love": 3,
+      "laugh": 0
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 8,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Redux or Zustand?",
+    "reactions": {
+      "like": 1,
+      "love": 3,
+      "laugh": 2
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 8,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Firebase is great for real-time apps.",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 8,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "system",
+    "message": "System message: A user has joined the conversation!",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 8,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/8_6/200/300",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 8,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Any book recommendations for developers?",
+    "reactions": {
+      "like": 4,
+      "love": 3,
+      "laugh": 2
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 8,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Nice to meet you!",
+    "reactions": {
+      "like": 0,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 8,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Redux or Zustand?",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 9,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Good morning!",
+    "reactions": {
+      "like": 3,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 9,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Firebase is great for real-time apps.",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 9,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Any good UI libraries to recommend?",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 9,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Do you like writing documentation?",
+    "reactions": {
+      "like": 2,
+      "love": 1,
+      "laugh": 2
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 9,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "What's your favorite programming language?",
+    "reactions": {
+      "like": 0,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 9,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/9_5/200/300",
+    "reactions": {
+      "like": 1,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 9,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Any good UI libraries to recommend?",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 2
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 9,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "Redux or Zustand?",
+    "reactions": {
+      "like": 4,
+      "love": 2,
+      "laugh": 1
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 9,
+    "userId": 3,
+    "user": "Charlie",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "messageType": "text",
+    "message": "What are you working on?",
+    "reactions": {
+      "like": 5,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 9,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Svelte is underrated.",
+    "reactions": {
+      "like": 0,
+      "love": 2,
+      "laugh": 0
+    },
+    "timestamp": 1739016540000
+  },
+  {
+    "conversationId": 10,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Any book recommendations for developers?",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016000000
+  },
+  {
+    "conversationId": 10,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Do you deploy with Vercel or Netlify?",
+    "reactions": {
+      "like": 1,
+      "love": 3,
+      "laugh": 2
+    },
+    "timestamp": 1739016060000
+  },
+  {
+    "conversationId": 10,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Let's meet up sometime!",
+    "reactions": {
+      "like": 2,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016120000
+  },
+  {
+    "conversationId": 10,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/10_3/200/300",
+    "reactions": {
+      "like": 3,
+      "love": 3,
+      "laugh": 1
+    },
+    "timestamp": 1739016180000
+  },
+  {
+    "conversationId": 10,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "image",
+    "message": "https://picsum.photos/seed/10_4/200/300",
+    "reactions": {
+      "like": 4,
+      "love": 1,
+      "laugh": 0
+    },
+    "timestamp": 1739016240000
+  },
+  {
+    "conversationId": 10,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Let's meet up sometime!",
+    "reactions": {
+      "like": 5,
+      "love": 1,
+      "laugh": 2
+    },
+    "timestamp": 1739016300000
+  },
+  {
+    "conversationId": 10,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "How do you test your frontend?",
+    "reactions": {
+      "like": 5,
+      "love": 2,
+      "laugh": 2
+    },
+    "timestamp": 1739016360000
+  },
+  {
+    "conversationId": 10,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Do you like writing documentation?",
+    "reactions": {
+      "like": 0,
+      "love": 0,
+      "laugh": 1
+    },
+    "timestamp": 1739016420000
+  },
+  {
+    "conversationId": 10,
+    "userId": 1,
+    "user": "Alice",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "messageType": "text",
+    "message": "Nice to meet you!",
+    "reactions": {
+      "like": 1,
+      "love": 0,
+      "laugh": 2
+    },
+    "timestamp": 1739016480000
+  },
+  {
+    "conversationId": 10,
+    "userId": 5,
+    "user": "Emma",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "messageType": "text",
+    "message": "Open-source contributions are fun!",
+    "reactions": {
+      "like": 0,
+      "love": 1,
+      "laugh": 1
+    },
+    "timestamp": 1739016540000
+  }
+]

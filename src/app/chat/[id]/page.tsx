@@ -21,6 +21,7 @@ export default function ChatPage() {
     toggleReaction,
     markAsRead,
     darkMode,
+    currentUser,
   } = useChatStore();
   const [input, setInput] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -29,14 +30,17 @@ export default function ChatPage() {
     string | null
   >(null);
   const [bgActivityInitialized, setBgActivityInitialized] = useState(false);
-
+  const isReactionUpdate = useRef(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const currentChatId = id as string;
   const currentMessages = useMemo(
     () => messages[currentChatId] || [],
     [messages, currentChatId]
   );
-  const currentConversation = conversations.find((c) => c.id === currentChatId);
+
+  const currentConversation = conversations.find(
+    (c) => c.id.toString() === currentChatId
+  );
 
   useEffect(() => {
     if (!bgActivityInitialized) {
@@ -47,16 +51,25 @@ export default function ChatPage() {
 
   useEffect(() => {
     setSelectedChat(currentChatId);
-    // Mark messages as read when opening conversation
     markAsRead(currentChatId);
   }, [currentChatId, setSelectedChat, markAsRead]);
 
   useEffect(() => {
+    if (isReactionUpdate.current) {
+      isReactionUpdate.current = false;
+      return;
+    }
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const imageMessages = currentMessages.filter((msg) => msg.content.image);
+    if (imageMessages.length > 0) {
+      const timer = setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+      return () => clearTimeout(timer);
+    }
   }, [currentMessages]);
 
   useEffect(() => {
-    // Close reaction popup when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (
         activeReactionMessage &&
@@ -70,7 +83,7 @@ export default function ChatPage() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [activeReactionMessage]);
 
-  const formatTime = (timestamp: string) => {
+  const formatTime = (timestamp: number) => {
     return new Date(timestamp).toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
@@ -81,6 +94,7 @@ export default function ChatPage() {
     messageId: string,
     reactionType: "like" | "love" | "laugh"
   ) => {
+    isReactionUpdate.current = true;
     toggleReaction(currentChatId, messageId, reactionType);
     setActiveReactionMessage(null);
   };
@@ -91,17 +105,13 @@ export default function ChatPage() {
 
     const newMessage: Message = {
       id: `m${Date.now()}`,
-      sender: {
-        id: "me",
-        name: "You",
-        avatar: "/avatars/you.jpg",
-      },
+      sender: currentUser,
       content: {
         ...(input.trim() && { text: input.trim() }),
         ...(imagePreview && { image: imagePreview }),
       },
-      timestamp: new Date().toISOString(),
-      reactions: { like: false, love: false, laugh: false },
+      timestamp: new Date().getTime(),
+      reactions: { like: 0, love: 0, laugh: 0 },
       status: "sent",
     };
 
@@ -109,7 +119,8 @@ export default function ChatPage() {
     setInput("");
     setImage(null);
     setImagePreview(null);
-    simulateResponse(currentChatId, input.trim() || "image");
+    simulateResponse(currentChatId, input.trim() || "image", currentUser);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,37 +138,40 @@ export default function ChatPage() {
   };
 
   const renderReactionCount = (msg: Message) => {
-    const like = msg.reactions?.like || false;
-    const love = msg.reactions?.love || false;
-    const laugh = msg.reactions?.laugh || false;
+    const likeCount = msg.reactions?.like || 0;
+    const loveCount = msg.reactions?.love || 0;
+    const laughCount = msg.reactions?.laugh || 0;
 
-    if (!like && !love && !laugh) return null;
+    if (likeCount === 0 && loveCount === 0 && laughCount === 0) return null;
 
     return (
       <div className="flex items-center space-x-2 text-xs mt-1">
-        <div className="flex -space-x-1">
-          {like && (
+        <div className="flex gap-1">
+          {likeCount > 0 && (
             <button
               onClick={() => handleReaction(msg.id, "like")}
-              className={`bg-blue-500 rounded-full p-1 transition-transform hover:scale-110`}
+              className={`flex items-center bg-blue-500 rounded-full p-1 transition-transform hover:scale-110`}
             >
               <FaThumbsUp className={`w-3 h-3 text-white`} />
+              <span className="ml-1 text-white text-xs">{likeCount}</span>
             </button>
           )}
-          {love && (
+          {loveCount > 0 && (
             <button
               onClick={() => handleReaction(msg.id, "love")}
-              className={`bg-red-500 rounded-full p-1 transition-transform hover:scale-110`}
+              className={`flex items-center bg-red-500 rounded-full p-1 transition-transform hover:scale-110`}
             >
               <FaHeart className={`w-3 h-3 text-white`} />
+              <span className="ml-1 text-white text-xs">{loveCount}</span>
             </button>
           )}
-          {laugh && (
+          {laughCount > 0 && (
             <button
               onClick={() => handleReaction(msg.id, "laugh")}
-              className={`bg-yellow-500 rounded-full p-1 transition-transform hover:scale-110`}
+              className={`flex items-center bg-yellow-500 rounded-full p-1 transition-transform hover:scale-110`}
             >
               <FaLaugh className={`w-3 h-3 text-white`} />
+              <span className="ml-1 text-white text-xs">{laughCount}</span>
             </button>
           )}
         </div>
@@ -228,7 +242,7 @@ export default function ChatPage() {
         >
           <FaThumbsUp
             className={`${
-              currentReactions.like ? "text-blue-500" : "text-gray-400"
+              currentReactions.like > 0 ? "text-blue-500" : "text-gray-400"
             }`}
           />
         </button>
@@ -238,7 +252,7 @@ export default function ChatPage() {
         >
           <FaHeart
             className={`${
-              currentReactions.love ? "text-red-500" : "text-gray-400"
+              currentReactions.love > 0 ? "text-red-500" : "text-gray-400"
             }`}
           />
         </button>
@@ -248,7 +262,7 @@ export default function ChatPage() {
         >
           <FaLaugh
             className={`${
-              currentReactions.laugh ? "text-yellow-500" : "text-gray-400"
+              currentReactions.laugh > 0 ? "text-yellow-500" : "text-gray-400"
             }`}
           />
         </button>
@@ -266,7 +280,7 @@ export default function ChatPage() {
 
   // Get the other participant
   const otherParticipant = currentConversation.participants.find(
-    (p) => p.id !== "me"
+    (p) => p.id !== currentUser.id
   );
 
   if (!otherParticipant) {
@@ -315,19 +329,25 @@ export default function ChatPage() {
       {/* Chat Messages */}
       <div className="overflow-y-auto flex-1 p-4 space-y-4">
         {currentMessages.map((msg) => {
-          const isMe = msg.sender.id === "me";
-
+          const isMe = msg.sender.id === currentUser.id;
+          const isSystem = msg.content.system && msg.content.system?.length > 0;
           return (
             <div
               key={msg.id}
-              className={`flex ${isMe ? "justify-end" : "justify-start"}`}
+              className={`flex ${
+                isSystem
+                  ? "justify-center"
+                  : isMe
+                  ? "justify-end"
+                  : "justify-start"
+              }`}
             >
               <div
                 className={`flex items-start space-x-2 max-w-full ${
                   isMe ? "flex-row-reverse space-x-reverse" : ""
                 }`}
               >
-                {!isMe && (
+                {!isMe && !isSystem && (
                   <Image
                     src={msg.sender.avatar}
                     width={32}
@@ -338,8 +358,12 @@ export default function ChatPage() {
                 )}
 
                 <div
-                  className={`relative p-3 rounded-lg max-w-xs sm:max-w-sm break-words ${
-                    isMe
+                  className={`relative ${
+                    isSystem ? "p-0" : "p-3 rounded-lg"
+                  } max-w-xs sm:max-w-sm break-words ${
+                    isSystem
+                      ? "text-gray-400 dark:text-gray-500 text-sm"
+                      : isMe
                       ? darkMode
                         ? "bg-[#545556] text-white"
                         : "bg-[#dbdbdb] text-[#545556]"
@@ -347,7 +371,9 @@ export default function ChatPage() {
                       ? "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
                       : "bg-gray-100 text-[#545556]"
                   }`}
-                  onDoubleClick={() => setActiveReactionMessage(msg.id)}
+                  onDoubleClick={() =>
+                    isSystem ? null : setActiveReactionMessage(msg.id)
+                  }
                 >
                   <div className="space-y-2">
                     {msg.content.image && (
@@ -358,11 +384,17 @@ export default function ChatPage() {
                           width={200}
                           height={200}
                           className="rounded-md max-w-full h-auto object-contain"
+                          placeholder="blur"
+                          blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23cccccc'/%3E%3C/svg%3E"
                         />
                       </div>
                     )}
                     {msg.content.text && (
                       <p className="break-words">{msg.content.text}</p>
+                    )}
+
+                    {msg.content.system && (
+                      <p className="break-words">{msg.content.system}</p>
                     )}
                   </div>
                   <div className="flex justify-between text-xs text-gray-300 dark:text-gray-400 mt-1">
@@ -373,7 +405,7 @@ export default function ChatPage() {
                     >
                       {formatTime(msg.timestamp)}
                     </span>
-                    {isMe && (
+                    {isMe && !isSystem && (
                       <span className="flex items-center space-x-1">
                         {msg.status === "sent" && <span>✓</span>}
                         {msg.status === "delivered" && <span>✓✓</span>}
@@ -385,7 +417,7 @@ export default function ChatPage() {
                       </span>
                     )}
                   </div>
-                  {renderReactionCount(msg)}
+                  {!isSystem && renderReactionCount(msg)}
                   {activeReactionMessage === msg.id && (
                     <ReactionPopup
                       messageId={msg.id}
@@ -409,7 +441,11 @@ export default function ChatPage() {
                 className="w-8 h-8 rounded-full"
                 alt="avatar"
               />
-              <div className={`p-3 rounded-lg bg-gray-200 dark:bg-gray-700`}>
+              <div
+                className={`p-3 rounded-lg ${
+                  darkMode ? "bg-gray-700" : "bg-gray-200"
+                }`}
+              >
                 <div className="flex space-x-1">
                   <div
                     className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"
@@ -428,7 +464,6 @@ export default function ChatPage() {
             </div>
           </div>
         )}
-
         <div ref={messagesEndRef} />
       </div>
 
