@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗨️ Chat Platform
 
-## Getting Started
+A responsive chat platform with a collapsible sidebar for managing conversations. Supports dark mode and adapts to different screen sizes for an optimized user experience.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 📱 **Responsive Design** – Automatically adapts to desktop and mobile views.
+- 🌑 **Dark Mode Support** – Allows users to toggle between light and dark themes.
+- 📜 **Conversation List Sidebar** – Displays a list of conversations in a sidebar.
+- 📌 **Fixed & Collapsible Sidebar** – 
+  - Sidebar is **fixed** on desktop.
+  - Sidebar is **collapsible** on mobile with smooth transitions.
+- 🎭 **Mobile Overlay** – A semi-transparent overlay appears when the sidebar is open on mobile.
+- 🔄 **Auto-Hide Sidebar on Resize** – Sidebar automatically hides on smaller screens and appears on larger screens.
+- 🏎️ **Optimized Performance** – Uses React state (`useState`) and effects (`useEffect`) efficiently.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **React (Next.js)** – Core framework.
+- **Tailwind CSS** – For styling and responsive design.
+- **React Icons** – Used for sidebar toggle buttons (`FaBars`, `FaTimes`).
+- **Zustand** – Manages global state (`useChatStore`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Installation
 
-## Learn More
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/chat-platform.git
+   cd chat-platform
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
+   ```sh
+   npm run dev
+     # or
+   yarn dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Start the development server:
+    npm run dev
+    # or
+    yarn dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Open http://localhost:3000 in your browser.
