@@ -53,7 +53,7 @@ export default function ConversationList() {
     setShowNewChatForm(false);
     setSelectedChat(newId);
 
-    router.push(`/chat/${newId}`);
+    router.push(`/chat/item?id=${newId}`);
   };
 
   return (
