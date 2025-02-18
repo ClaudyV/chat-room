@@ -9,10 +9,11 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function ChatPage() {
-  const { id } = useParams();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const {
     setSelectedChat,
     messages,

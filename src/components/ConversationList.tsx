@@ -115,7 +115,11 @@ export default function ConversationList() {
       {/* Conversation List */}
       <div className="flex-1 overflow-y-auto">
         {conversations.map((conv) => (
-          <Link key={conv.id} href={`/chat/${conv.id}`} className="!mt-0 block">
+          <Link
+            key={conv.id}
+            href={`/chat/item?id=${conv.id}`}
+            className="!mt-0 block"
+          >
             <div
               onClick={() => setSelectedChat(conv.id)}
               className={`flex justify-between items-center p-3 mb-2 rounded-lg cursor-pointer transition-colors ${
