@@ -1,7 +1,7 @@
 "use client";
 
 import { FaBars, FaTimes } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import ConversationList from "@/components/ConversationList";
 import { useChatStore } from "@/store/chatStore";
@@ -37,10 +37,17 @@ export default function ChatLayout({
   };
 
   return (
-    <div className="flex h-screen relative">
-      {/* Sidebar - Conversation List */}
-      <aside
-        className={`
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-screen">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      }
+    >
+      <div className="flex h-screen relative">
+        {/* Sidebar - Conversation List */}
+        <aside
+          className={`
           fixed lg:static left-0 top-0 bottom-0
           ${
             showSidebar ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
@@ -50,54 +57,55 @@ export default function ChatLayout({
           ${darkMode ? "bg-gray-900" : "bg-gray-100"}
           ${isMobile ? "w-3/4" : "w-1/4"}
         `}
-      >
-        <ConversationList />
+        >
+          <ConversationList />
 
-        {isMobile && (
-          <button
-            onClick={toggleSidebar}
-            className={`absolute top-4 right-4 p-2 rounded-full 
+          {isMobile && (
+            <button
+              onClick={toggleSidebar}
+              className={`absolute top-4 right-4 p-2 rounded-full 
               ${
                 darkMode
                   ? "bg-gray-700 text-white"
                   : "bg-gray-200 text-gray-800"
               }`}
-          >
-            <FaTimes />
-          </button>
-        )}
-      </aside>
+            >
+              <FaTimes />
+            </button>
+          )}
+        </aside>
 
-      {/* Main Chat Content */}
-      <main
-        className={`flex-1 flex flex-col ${
-          darkMode ? "bg-gray-800" : "bg-white"
-        }`}
-      >
-        {isMobile && (
-          <button
-            onClick={toggleSidebar}
-            className={`fixed top-4 right-4 p-2 z-50
+        {/* Main Chat Content */}
+        <main
+          className={`flex-1 flex flex-col ${
+            darkMode ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          {isMobile && (
+            <button
+              onClick={toggleSidebar}
+              className={`fixed top-4 right-4 p-2 z-50
               ${
                 darkMode
                   ? "bg-gray-700 text-white"
                   : "bg-gray-200 text-gray-800"
               }
               rounded-full shadow-lg`}
-          >
-            <FaBars />
-          </button>
+            >
+              <FaBars />
+            </button>
+          )}
+
+          <div className="flex-1 overflow-hidden">{children}</div>
+        </main>
+
+        {isMobile && showSidebar && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+            onClick={toggleSidebar}
+          />
         )}
-
-        <div className="flex-1 overflow-hidden">{children}</div>
-      </main>
-
-      {isMobile && showSidebar && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={toggleSidebar}
-        />
-      )}
-    </div>
+      </div>
+    </Suspense>
   );
 }
