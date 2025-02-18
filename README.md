@@ -2,7 +2,7 @@
 
 A responsive chat platform with a collapsible sidebar for managing conversations. Supports dark mode and adapts to different screen sizes for an optimized user experience.
 
-### Live demo: https://github.com/ClaudyV/chat-room
+### Live demo: [[https://github.com/ClaudyV/chat-room](https://chat-room-theta-two.vercel.app/)](https://chat-room-theta-two.vercel.app/)
 
 ## ✨ Features
 
