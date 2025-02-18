@@ -30,13 +30,14 @@ A responsive chat platform with a collapsible sidebar for managing conversations
 
 2. Install dependencies:
    ```sh
-   npm run dev
-     # or
-   yarn dev
+   npm install
+   # or
+   yarn install
 
 3. Start the development server:
-    npm run dev
-    # or
-    yarn dev
+   ```sh
+   npm run dev
+   # or
+   yarn dev
 
 4. Open http://localhost:3000 in your browser.
