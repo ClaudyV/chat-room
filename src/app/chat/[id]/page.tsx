@@ -281,11 +281,11 @@ export default function ChatPage() {
     <div
       className={`${
         darkMode ? "bg-white dark:bg-gray-800" : "bg-white"
-      } flex flex-col h-screen `}
+      } flex flex-col h-screen`}
     >
       {/* Chat Header */}
       <div
-        className={`p-4  border-b flex items-center space-x-3 ${
+        className={`p-4 border-b flex items-center space-x-3 ${
           darkMode ? "bg-gray-100 dark:bg-gray-700" : "bg-white"
         }`}
       >
@@ -296,9 +296,9 @@ export default function ChatPage() {
           className="w-10 h-10 rounded-full"
           alt="avatar"
         />
-        <div>
+        <div className="flex-1 min-w-0">
           <h2
-            className={`text-lg font-semibold ${
+            className={`text-lg font-semibold truncate ${
               darkMode ? "text-white" : "text-black"
             }`}
           >
@@ -323,8 +323,8 @@ export default function ChatPage() {
               className={`flex ${isMe ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`flex items-start space-x-3 ${
-                  isMe ? "flex-row-reverse" : ""
+                className={`flex items-start space-x-2 max-w-full ${
+                  isMe ? "flex-row-reverse space-x-reverse" : ""
                 }`}
               >
                 {!isMe && (
@@ -332,13 +332,13 @@ export default function ChatPage() {
                     src={msg.sender.avatar}
                     width={32}
                     height={32}
-                    className="w-8 h-8 rounded-full"
+                    className="w-8 h-8 rounded-full flex-shrink-0"
                     alt="avatar"
                   />
                 )}
 
                 <div
-                  className={`relative p-3 rounded-lg max-w-xs ${
+                  className={`relative p-3 rounded-lg max-w-xs sm:max-w-sm break-words ${
                     isMe
                       ? darkMode
                         ? "bg-[#545556] text-white"
@@ -351,15 +351,19 @@ export default function ChatPage() {
                 >
                   <div className="space-y-2">
                     {msg.content.image && (
-                      <Image
-                        src={msg.content.image}
-                        alt="sent image"
-                        width={200}
-                        height={200}
-                        className="rounded-md"
-                      />
+                      <div className="relative w-full">
+                        <Image
+                          src={msg.content.image}
+                          alt="sent image"
+                          width={200}
+                          height={200}
+                          className="rounded-md max-w-full h-auto object-contain"
+                        />
+                      </div>
                     )}
-                    {msg.content.text && <p>{msg.content.text}</p>}
+                    {msg.content.text && (
+                      <p className="break-words">{msg.content.text}</p>
+                    )}
                   </div>
                   <div className="flex justify-between text-xs text-gray-300 dark:text-gray-400 mt-1">
                     <span
@@ -447,30 +451,37 @@ export default function ChatPage() {
             </button>
           </div>
         )}
-        <div className="flex">
-          <input
-            type="text"
-            className={`flex-1 p-2 border rounded-md ${
-              darkMode ? "bg-gray-700 text-white" : "text-black"
-            }`}
-            placeholder="Type a message..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-          />
-          <label htmlFor="image-upload" className="ml-2 cursor-pointer">
-            <FaImage className="text-2xl text-gray-500 hover:text-blue-500" />
-          </label>
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageUpload}
-          />
+        <div className="flex flex-col sm:flex-row">
+          <div className="flex-1 flex mb-2 sm:mb-0">
+            <input
+              type="text"
+              className={`flex-1 p-2 border rounded-md ${
+                darkMode ? "bg-gray-700 text-white" : "text-black"
+              }`}
+              placeholder="Type a message..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) =>
+                e.key === "Enter" && !e.shiftKey && sendMessage()
+              }
+            />
+            <label
+              htmlFor="image-upload"
+              className="ml-2 flex items-center cursor-pointer"
+            >
+              <FaImage className="text-2xl text-gray-500 hover:text-blue-500" />
+            </label>
+            <input
+              id="image-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageUpload}
+            />
+          </div>
           <button
             onClick={sendMessage}
-            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md"
+            className="px-4 py-2 bg-blue-500 text-white rounded-md sm:ml-2 w-full sm:w-auto"
           >
             Send
           </button>

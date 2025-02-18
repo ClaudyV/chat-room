@@ -67,7 +67,7 @@ export default function ConversationList() {
 
   return (
     <div
-      className={`p-4 space-y-4 h-screen w-full flex flex-col gap-2 transition-colors ${
+      className={`p-4 space-y-4 h-screen w-full flex flex-col gap-2 transition-colors overflow-y-auto ${
         darkMode ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-gray-900"
       }`}
     >
@@ -122,49 +122,53 @@ export default function ConversationList() {
       </div>
 
       {/* Conversation List */}
-      {conversations.map((conv) => (
-        <Link key={conv.id} href={`/chat/${conv.id}`} className="!mt-0">
-          <div
-            onClick={() => setSelectedChat(conv.id)}
-            className={`flex justify-between items-center p-3 rounded-lg cursor-pointer transition-colors ${
-              selectedChatId === conv.id
-                ? darkMode
-                  ? "bg-gray-500"
-                  : "bg-gray-300"
-                : darkMode
-                ? " hover:bg-gray-600"
-                : "hover:bg-gray-200"
-            }`}
-          >
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <Image
-                  src={conv.participants[1].avatar}
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                  alt="avatar"
-                />
-                {conv.unreadCount ? (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {conv.unreadCount > 9 ? "9+" : conv.unreadCount}
-                  </span>
-                ) : null}
+      <div className="flex-1 overflow-y-auto">
+        {conversations.map((conv) => (
+          <Link key={conv.id} href={`/chat/${conv.id}`} className="!mt-0 block">
+            <div
+              onClick={() => setSelectedChat(conv.id)}
+              className={`flex justify-between items-center p-3 mb-2 rounded-lg cursor-pointer transition-colors ${
+                selectedChatId === conv.id
+                  ? darkMode
+                    ? "bg-gray-500"
+                    : "bg-gray-300"
+                  : darkMode
+                  ? " hover:bg-gray-600"
+                  : "hover:bg-gray-200"
+              }`}
+            >
+              <div className="flex items-center space-x-3">
+                <div className="relative flex-shrink-0">
+                  <Image
+                    src={conv.participants[1].avatar}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                    alt="avatar"
+                  />
+                  {conv.unreadCount ? (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {conv.unreadCount > 9 ? "9+" : conv.unreadCount}
+                    </span>
+                  ) : null}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold truncate">
+                    {conv.participants[1].name}
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate w-full sm:w-32 md:w-40 lg:w-48">
+                    {conv.lastMessage}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className={"font-semibold"}>{conv.participants[1].name}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 truncate w-48">
-                  {conv.lastMessage}
-                </p>
-              </div>
-            </div>
 
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              {formatTime(conv.timestamp)}
-            </p>
-          </div>
-        </Link>
-      ))}
+              <p className="text-xs text-gray-500 dark:text-gray-400 flex-shrink-0 ml-2">
+                {formatTime(conv.timestamp)}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
 
       {/* Dark Mode Toggle */}
       <div className="mt-auto flex justify-center p-3">
@@ -175,7 +179,9 @@ export default function ConversationList() {
             dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
         >
           {darkMode ? <FaSun /> : <FaMoon />}
-          <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
+          <span className="hidden sm:inline">
+            {darkMode ? "Light Mode" : "Dark Mode"}
+          </span>
         </button>
       </div>
     </div>
